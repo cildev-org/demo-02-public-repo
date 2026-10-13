@@ -11,3 +11,4 @@ RUN rm -f /etc/apt/sources.list.d/* && \
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
 EXPOSE 80
 CMD ["haproxy", "-db", "-f", "/etc/haproxy/haproxy.cfg"]
+# blue-oryx live test
