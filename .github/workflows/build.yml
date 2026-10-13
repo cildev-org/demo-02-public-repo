@@ -1,0 +1,23 @@
+name: build
+
+# Builds the image and stops there: nothing is pushed and nothing is deployed.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build image
+        run: docker build -t demo-02-target:ci .
+      - name: Show installed haproxy version
+        run: docker run --rm demo-02-target:ci dpkg-query -W -f '${Package} ${Version}\n' haproxy
