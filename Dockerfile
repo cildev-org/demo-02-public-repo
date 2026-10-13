@@ -5,7 +5,7 @@ ARG SNAP=20240115T000000Z
 RUN rm -f /etc/apt/sources.list.d/* && \
     printf 'deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/%s/ bookworm main\ndeb [check-valid-until=no] http://snapshot.debian.org/archive/debian-security/%s/ bookworm-security main\n' "$SNAP" "$SNAP" > /etc/apt/sources.list && \
     apt-get -o Acquire::Check-Valid-Until=false update && \
-    apt-get install -y --no-install-recommends haproxy=2.6.12-1 && \
+    apt-get install -y --no-install-recommends haproxy=2.6.12-1+deb12u1 && \
     rm -rf /var/lib/apt/lists/*
 
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
